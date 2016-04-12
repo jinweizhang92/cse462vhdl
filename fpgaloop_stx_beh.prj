@@ -1,0 +1,2 @@
+vhdl isim_temp "ipcore_dir/mydport.vhd"
+vhdl isim_temp "fpgaloop.vhd"

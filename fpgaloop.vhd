@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --Entity-----------------------------------------------------------------------------------------------------
 entity fpgaloop is
 
-	Port (	clk 		: in		STD_LOGIC;							--usb clock
+	Port (	clk_in 		: in		STD_LOGIC;							--usb clock
 				reset_h	: in		std_logic;
 				rxf_l 	: in  	STD_LOGIC;
 --				txe_l		: in  	STD_LOGIC;
@@ -43,7 +43,7 @@ entity fpgaloop is
 				wr_l 		: out  	STD_LOGIC;
 				siwua		: out  	STD_LOGIC;
 				d			: in		std_logic_vector(7 downto 0);
-				clkb 		: in		STD_LOGIC;							--VGA clock
+				clkv 		: out		STD_LOGIC;							--VGA clock
 				r 			: out  	std_logic_vector(2 downto 0) := "000";
 				g			: out  	std_logic_vector(2 downto 0) := "000";
 				b 			: out  	std_logic_vector(2 downto 0) := "000";
@@ -61,23 +61,22 @@ architecture Behavioral of fpgaloop is
 	signal	cnt_rst		: std_logic := '0';     --High active to reset address counter.
 --	signal	cnt_add		: std_logic_vector(15 downto 0) := "0000000000000000";
 	signal	chkrst		: std_logic_vector(15 downto 0) := "0000000000000000";	--check the reset vector ffffH
+	signal	pair			: std_logic_vector(1 downto 0)  := "00";	--"00"-None; "01"-One byte; "10"-A pair of two bytes
 	signal	wea			: std_logic_vector (0 downto 0) := "0";
---	signal	half			: std_logic := '0';	--If high, first byte in two has been received
+	signal	clk			: std_logic := '0';
+	signal	clkb			: std_logic := '0';
 	signal	hld_l			: std_logic := '0';
-	signal	wr_start		: std_logic := '0';		--Indicate the first cycle of the write process
 	signal	byte_h		: std_logic_vector(7 downto 0) := "11111111";
 	signal	byte_l		: std_logic_vector(7 downto 0) := "00000000";
 
 	signal	addra			: std_logic_vector(15 downto 0) := "0000000000000000";
-	signal	nxt_addra	: std_logic_vector(15 downto 0) := "0000000000000000";
+--	signal	nxt_addra	: std_logic_vector(15 downto 0) := "0000000000000000";
 	signal	addrb			: std_logic_vector(15 downto 0) := "0000000000000000";
 	signal	dina			: std_logic_vector(8 downto 0) := "000000000";
 	signal	doutb			: std_logic_vector(8 downto 0) := "000000000";
---	signal	clka			: std_logic;
---	signal	clkb			: std_logic;
 --	signal	rstb			: std_logic := '0';
-	signal	nxt_oe		: std_logic := '1';
-	signal	nxt_rd		: std_logic := '1';
+--	signal	nxt_oe		: std_logic := '1';
+--	signal	nxt_rd		: std_logic := '1';
 --	signal	nxt_wr		: std_logic := '1';
 --	signal	nxt_siwua	: std_logic := '1';				
 	type		states		is (s0, s1, s2, s3,s4);
@@ -110,6 +109,20 @@ architecture Behavioral of fpgaloop is
 	END COMPONENT;
 --End component --------------------------------------------------------------------------------------------
 
+--Define the component of my dcm---------------------------------------------------------------
+component mydcm
+port
+ (-- Clock in ports
+  CLK_IN1           : in     std_logic;
+  -- Clock out ports
+  CLK_OUT1          : out    std_logic;
+  CLK_OUT2          : out    std_logic
+ );
+end component;
+
+--End component --------------------------------------------------------------------------------------------
+
+
 
 --Concurrent area-------------------------------------------------------------------------------------------
 begin
@@ -125,8 +138,16 @@ begin
 	 addrb => addrb,
 	 doutb => doutb
 	 );
+	 
+	 clock : mydcm
+  port map
+   (-- Clock in ports
+    CLK_IN1 => clk_in,
+    -- Clock out ports
+    CLK_OUT1 => clk,
+    CLK_OUT2 => clkb);
 
---Do need to write back-------------------------------------------------------------------------------------
+--Do not need to write back-------------------------------------------------------------------------------------
 	wr_l	<= '1';
 	siwua	<= '1';
 
@@ -136,6 +157,7 @@ begin
 
 
 --Drive RGB-------------------------------------------------------------------------------------------------
+	clkv <= clkb;
 	hs <= hs_tmp;
 	vs <= vs_tmp;
 --	r <= (doutb(8 downto 6) and h_on) ;
@@ -149,7 +171,7 @@ begin
 	addrb <= (  (count_v(7 downto 0) - 1) & (count_h(7 downto 0) -47)  ); 		
 
 -- Check system reset when ffffH is received----------------------------------------------------------------
-	crash <= '1' when ((byte_h & byte_l) = ("0000000000000000")) else '0';
+	crash <= '1' when ((byte_h & byte_l) = ("1111111111111111")) else '0';
 	
 	
 --process to implement the state register-------------------------------------------------------------------
@@ -178,13 +200,15 @@ begin
 			when s1 => 	nxt_state <= s2;
 														
 
-			when s2 =>  if(rxf_l = '1') then
-								nxt_state <= s0;
-							elsif (addra = 65535) then
-								nxt_state <= s3;
-							end if;
-							if (crash = '1') then
+			when s2 =>  if (crash = '1') then
 								nxt_state <= s4;
+							else
+								if(rxf_l = '1') then
+									nxt_state <= s0;
+								elsif (addra = 65535) then
+									nxt_state <= s3;
+								end if;
+								
 							end if;
 								
 			when s3 =>  if (rxf_l = '0') then
@@ -202,40 +226,42 @@ begin
 	output: process (rxf_l, addra, state)
 	begin
 		cnt_rst	<= '0';
-		nxt_rd	<= '1';
+		rd_l	<= '1';
 ----	nxt_wr	<= '1';
-		nxt_oe	<= '1';
+		oe_l	<= '1';
 ----	nxt_siwua <= '1';
 		hld_l <= '0';
 
 		case state is 
 			when s0 =>  if (rxf_l = '0') then
-								nxt_oe <= '0';
+								--oe_l <= '0';
 							end if;
 							
 							hld_l <= '0';
 							
 --			when s1, wait the data to be driven on d
 			when s1 => 
-								nxt_rd	<= '0';
-								nxt_oe	<= '0';
+								--rd_l	<= '0';
+								oe_l	<= '0';
 								hld_l		<= '1';
 
 			when s2 =>  if (rxf_l = '0') then
 								hld_l		<= '1';
-								nxt_oe	<= '0';
-								nxt_rd	<= '0';
+								--nxt_oe	<= '0';
+								--nxt_rd	<= '0';
+								oe_l	<= '0';
+								rd_l	<= '0';
 							else
 								hld_l		<= '0';
-								nxt_oe	<= '1';
-								nxt_rd	<= '1';
+								oe_l	<= '1';
+								rd_l	<= '1';
 								
 							end if; 
 							
 			when s3 =>  cnt_rst <= '1';
 			
-			when s4 =>  nxt_oe	<= '1';
-							nxt_rd	<= '1';
+			when s4 =>  oe_l	<= '1';
+							rd_l	<= '1';
 							cnt_rst	<= '1'; 		--crash occurs then reset counter
 
 		
@@ -244,16 +270,16 @@ begin
 	
 	
 --Process to latch the next signals for usb-------------------------------------------------------
-	nxtsignal: process (clk)
-	begin
-		if (clk'event and clk = '1') then
-			oe_l	<= nxt_oe;
-			rd_l	<= nxt_rd;
-------	wr_l	<= nxt_wr;
-------	siwua	<= nxt_siwua;
-
-		end if;		
-	end process nxtsignal;
+--	nxtsignal: process (clk)
+--	begin
+--		if (clk'event and clk = '1') then
+--------	oe_l	<= nxt_oe;
+--------	rd_l	<= nxt_rd;
+--------	wr_l	<= nxt_wr;
+--------	siwua	<= nxt_siwua;
+--
+--		end if;		
+--	end process nxtsignal;
 	
 --Process to transfer read data to byte_h and byte_l----------------------------------------------
 	byte2: process (clk)
@@ -262,8 +288,9 @@ begin
 			if (state = s2) then
 				if(hld_l = '1') then 
 					byte_h <= d;	
+					byte_l <= byte_h;
 				end if;
-				byte_l <= byte_h;
+				
 			end if;
 			
 		end if;
@@ -274,11 +301,11 @@ begin
 	begin
 			if (clk'event and clk = '1') then
 				if (cnt_rst = '1') then 
-					nxt_addra <= (others => '0');
-				elsif (wea = "1" and state = s2 and rxf_l = '0') then
+					addra <= (others => '0');
+				elsif (wea = "1" and state = s2) then
 					
-					nxt_addra <= nxt_addra + 1;
-					addra <= nxt_addra;
+					addra <= addra + 1;
+					--addra <= nxt_addra;
 				end if;
 				
 			end if;
@@ -290,17 +317,21 @@ begin
 	mywea: process (clk)
 	begin
 		if (clk'event and clk = '0') then
-			if (state = s2) then
-				if (rxf_l = '0') then
-					--Flip wea
-					if (wea(0) = '0') then
-						 wea(0) <= '1';
-					else
-						wea(0) <= '0';
-					end if;
+			--if (state = s2) then
+				if (pair = "10") then
+					--Assert wea
+					wea(0) <= '1';
+					
+--					if (wea(0) = '0') then
+--						 wea(0) <= '1';
+--					else
+--						wea(0) <= '0';
+--					end if;
+				else
+					wea(0) <= '0';
 				end if;
 
-			end if;
+			--end if;
 			if (crash = '1') then
 				wea(0) <= '0';
 			end if;	
@@ -310,17 +341,43 @@ begin
 	end process mywea;	
 	
 	
-----Process to check one byte or one pair of bytes have been received when rxf_l pulls high--------
---	pair: process (rxf_l)
---	begin
---		if (rxf_l'event and rxf_l = '1') then		
---				--If wea(0) is high, write is enable, then the next byte is the first byte of the pair
---				half <= wea(0);
---		end if;
---		if (rxf_l'event and rxf_l = '0') then
---				half <= '0';
---		end if;
---	end process pair;
+--Process to check one byte or one pair of bytes have been received-----------------------------
+	mypair: process (clk)
+	begin
+		if (clk'event and clk = '1') then		
+			if (cnt_rst = '1') then
+				pair <= "00";
+			else
+				If (state = s2 ) then
+--					if (pair = "00") then
+--						pair	<= "01";
+--					elsif (pair = "01") then
+--						pair	<= "10";
+--					else
+--						pair	<= "00";
+					
+					if (pair = "10") then
+						if (hld_l = '0') then
+							pair <= "00";
+						else
+							pair <= "01";
+						end if;
+					end if;
+					if (pair = "01") then 
+						if (hld_l = '1') then
+							pair <= "10";
+						else
+							pair <= "01";
+						end if;
+				   end if;
+					if (pair = "00") then 
+						pair <= "01";
+					end if;
+				end if;
+			end if;
+		end if;
+		
+	end process mypair;
 	
 	
 --Hsync counter process--------------------------------------------------------------------------

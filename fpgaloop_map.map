@@ -1,0 +1,148 @@
+Release 14.7 Map P.20131013 (nt64)
+Xilinx Map Application Log File for Design 'fpgaloop'
+
+Design Information
+------------------
+Command Line   : map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol
+high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off
+-pr off -lc off -power off -o fpgaloop_map.ncd fpgaloop.ngd fpgaloop.pcf 
+Target Device  : xc6slx9
+Target Package : tqg144
+Target Speed   : -3
+Mapper Version : spartan6 -- $Revision: 1.55 $
+Mapped Date    : Mon Apr 11 23:06:58 2016
+
+Mapping design into LUTs...
+Running directed packing...
+Running delay-based LUT packing...
+Updating timing models...
+WARNING:Pack:1653 - At least one timing constraint is impossible to meet because component delays alone exceed the constraint. A timing
+   constraint summary below shows the failing constraints (preceded with an Asterisk (*)). Please use the Timing Analyzer (GUI) or TRCE
+   (command line) with the Mapped NCD and PCF files to identify which constraints and paths are failing because of the component delays
+   alone. If the failing path(s) is mapped to Xilinx components as expected, consider relaxing the constraint. If it is not mapped to
+   components as expected, re-evaluate your HDL and how synthesis is optimizing the path. To allow the tools to bypass this error, set the
+   environment variable XIL_TIMING_ALLOW_IMPOSSIBLE to 1.
+
+
+   For more information about the Timing Analyzer, consult the Xilinx Timing Analyzer Reference manual; for more information on TRCE,
+   consult the Xilinx Command Line Tools User Guide "TRACE" chapter.
+INFO:Timing:3284 - This timing report was generated using estimated delay 
+   information.  For accurate numbers, please refer to the post Place and Route 
+   timing report.
+Number of Timing Constraints that were not applied: 2
+
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+* OFFSET = OUT 5.667 ns AFTER COMP "clk_in" | MAXDELAY    |    -0.323ns|     5.990ns|       9|        2691
+----------------------------------------------------------------------------------------------------------
+  OFFSET = IN 9 ns VALID 9.5 ns BEFORE COMP | SETUP       |     6.864ns|     2.136ns|       0|           0
+   "clk_in"                                 | HOLD        |     0.014ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_clock_clk0 = PERIOD TIMEGRP "clock_clk | SETUP       |     7.226ns|     2.214ns|       0|           0
+  0" TS_1 HIGH 50%                          | HOLD        |     0.132ns|            |       0|           0
+                                            | MINPERIOD   |    13.542ns|     3.124ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_1 = PERIOD TIMEGRP "clk_in" 16.666 ns  | MINLOWPULSE |     8.666ns|     8.000ns|       0|           0
+  HIGH 50%                                  |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_clock_clkfx = PERIOD TIMEGRP "clock_cl | SETUP       |    38.082ns|     1.916ns|       0|           0
+  kfx" TS_1 / 0.416666667 HIGH 50%          | HOLD        |     0.218ns|            |       0|           0
+                                            | MINPERIOD   |    36.874ns|     3.124ns|       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_2 = PERIOD TIMEGRP "clkv" 40 ns HIGH 5 | N/A         |         N/A|         N/A|     N/A|         N/A
+  0%                                        |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Review Timing Report for more details on the following derived constraints.
+To create a Timing Report, run "trce -v 12 -fastpaths -o design_timing_report design.ncd design.pcf"
+or "Run Timing Analysis" from Timing Analyzer (timingan).
+Derived Constraints for TS_1
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths
+Analyzed       |
+|           Constraint          | Requirement
+|-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    |
+Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+|TS_1                           |     16.666ns|      8.000ns|      3.124ns|            0|            0|            0|   
+     2710|
+| TS_clock_clkfx                |     39.998ns|      3.124ns|          N/A|            0|            0|         1391|   
+        0|
+| TS_clock_clk0                 |     16.666ns|      3.124ns|          N/A|            0|            0|         1319|   
+        0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+---
+----------+
+
+1 constraint not met.
+INFO:Timing:2761 - N/A entries in the Constraints List may indicate that the 
+   constraint is not analyzed due to the following: No paths covered by this 
+   constraint; Other constraints intersect with this constraint; or This 
+   constraint was disabled by a Path Tracing Control. Please run the Timespec 
+   Interaction Report (TSI) via command line (trce tsi) or Timing Analyzer GUI.
+
+
+INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
+   (.mrp).
+Running timing-driven placement...
+Total REAL time at the beginning of Placer: 16 secs 
+Total CPU  time at the beginning of Placer: 11 secs 
+
+Phase 1.1  Initial Placement Analysis
+Phase 1.1  Initial Placement Analysis (Checksum:d0f0ecd2) REAL time: 18 secs 
+
+Phase 2.7  Design Feasibility Check
+INFO:Place:834 - Only a subset of IOs are locked. Out of 28 IOs, 26 are locked
+   and 2 are not locked. If you would like to print the names of these IOs,
+   please set the environment variable XIL_PAR_DESIGN_CHECK_VERBOSE to 1. 
+ERROR:Place:1205 - This design contains a global buffer instance,
+   <clock/clkout2_buf>, driving the net, <clkv_OBUF>, that is driving the
+   following (first 30) non-clock load pins off chip.
+   < PIN: clkv.O; >
+   This design practice, in Spartan-6, can lead to an unroutable situation due
+   to limitations in the global routing. If the design does route there may be
+   excessive delay or skew on this net. It is recommended to use a Clock
+   Forwarding technique to create a reliable and repeatable low skew solution:
+   instantiate an ODDR2 component; tie the .D0 pin to Logic1; tie the .D1 pin to
+   Logic0; tie the clock net to be forwarded to .C0; tie the inverted clock to
+   .C1. If you wish to override this recommendation, you may use the
+   CLOCK_DEDICATED_ROUTE constraint (given below) in the .ucf file to demote
+   this message to a WARNING and allow your design to continue. Although the net
+   may still not route, you will be able to analyze the failure in FPGA_Editor.
+   < PIN "clock/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE; >
+
+ERROR:Place:1136 - This design contains a global buffer instance,
+   <clock/clkout2_buf>, driving the net, <clkv_OBUF>, that is driving the
+   following (first 30) non-clock load pins.
+   < PIN: clkv.O; >
+   This is not a recommended design practice in Spartan-6 due to limitations in
+   the global routing that may cause excessive delay, skew or unroutable
+   situations.  It is recommended to only use a BUFG resource to drive clock
+   loads. If you wish to override this recommendation, you may use the
+   CLOCK_DEDICATED_ROUTE constraint (given below) in the .ucf file to demote
+   this message to a WARNING and allow your design to continue.
+   < PIN "clock/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE; >
+
+Phase 2.7  Design Feasibility Check (Checksum:d0f0ecd2) REAL time: 19 secs 
+
+Total REAL time to Placer completion: 19 secs 
+Total CPU  time to Placer completion: 12 secs 
+ERROR:Pack:1654 - The timing-driven placement phase encountered an error.
+
+Mapping completed.
+See MAP report file "fpgaloop_map.mrp" for details.
+Problem encountered during the packing phase.
+
+Design Summary
+--------------
+Number of errors   :   3
+Number of warnings :   1

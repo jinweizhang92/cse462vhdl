@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Users\jinwei.zhang\Desktop\Learnmore\Learnmore\fpgaloop.ncd
+OUTFILE=C:\Users\jinwei.zhang\Desktop\Learnmore\Learnmore\fpgaloop.bit
+FAMILY=Spartan6
+PART=xc6slx9-3tqg144
+WORKINGDIR=C:\Users\jinwei.zhang\Desktop\Learnmore\Learnmore
+LICENSE=WebPack
+USER_INFO=210641303_1777494432_210611120_803

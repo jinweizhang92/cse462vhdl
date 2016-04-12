@@ -1,0 +1,3 @@
+vhdl work "ipcore_dir/mydport.vhd"
+vhdl work "ipcore_dir/mydcm.vhd"
+vhdl work "fpgaloop.vhd"

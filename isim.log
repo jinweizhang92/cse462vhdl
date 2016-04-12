@@ -1,0 +1,95 @@
+ISim log file
+Running: C:\Users\jinwei.zhang\Desktop\test\Learnmore\fpgaloop_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/jinwei.zhang/Desktop/test/Learnmore/fpgaloop_isim_beh.wdb 
+ISim P.20131013 (signature 0x7708f090)
+This is a Full version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# restart
+# source isim.do
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+at 500 ns(1): Note: Block Memory Generator CORE Generator module is using a behavioral model FOR simulation which will not precisely model memory collision behavior. (/fpgaloop/ram/U0/native_mem_module/mem_module/).
+/fpgaloop/d: Could not convert given string value ZZZZZZZZ to an appropriate value.
+# isim force add /fpgaloop/rxf_l 1 -radix bin
+# isim force add /fpgaloop/d ZZZZZZZZ -radix bin
+/fpgaloop/d: Could not convert given string value ZZZZZZZZ to an appropriate value.
+# run 40 ns
+# isim force add /fpgaloop/rxf_l 0 -radix bin
+# run 20 ns
+# run 20 ns
+# isim force add /fpgaloop/d 10000001 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11000000 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11100000 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/rxf_l 1 -radix bin
+# isim force add /fpgaloop/d ZZZZZZZZ -radix bin
+/fpgaloop/d: Could not convert given string value ZZZZZZZZ to an appropriate value.
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# isim force add /fpgaloop/rxf_l 0 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11110000 -radix bin
+# run 20 ns
+# run 20 ns
+# isim force add /fpgaloop/d 11111000 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11111100 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11111110 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11111111 -radix bin
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# restart
+# isim force add /fpgaloop/clk 1 -radix bin -value 0 -radix bin -time 10 ns -repeat 20 ns
+# isim force add /fpgaloop/reset_h 1 -radix bin
+# isim force add /fpgaloop/rxf_l 1 -radix bin
+# isim force add /fpgaloop/clkb 0 -radix bin
+# isim force add /fpgaloop/rstb 0 -radix bin
+# run 210 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# isim force add /fpgaloop/reset_h 0 -radix bin
+# run 200 ns
+# isim force add /fpgaloop/clkb 1 -radix bin -value 0 -radix bin -time 4 ns -repeat 8 ns
+# isim force add /fpgaloop/rxf_l 0 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 10101010 -radix bin
+# run 32 ns
+# isim force add /fpgaloop/rxf_l 1 -radix bin
+# isim force add /fpgaloop/d ZZZZZZZZ -radix bin
+/fpgaloop/d: Could not convert given string value ZZZZZZZZ to an appropriate value.
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# isim force add /fpgaloop/rxf_l 0 -radix bin
+# run 20 ns
+# run 20 ns
+# isim force add /fpgaloop/d 11000000 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11100000 -radix bin
+# run 20 ns
+at 600 ns(1): Note: Block Memory Generator CORE Generator module is using a behavioral model FOR simulation which will not precisely model memory collision behavior. (/fpgaloop/ram/U0/native_mem_module/mem_module/).
+# isim force add /fpgaloop/d 11110000 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11111000 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11111100 -radix bin
+# run 20 ns
+# isim force add /fpgaloop/d 11111111 -radix bin
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# run 20 ns
+# run 20 ns
+The simulator has terminated in an unexpected manner.  Please review the ISim log (isim.log) for details.

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/jinwei.zhang/Desktop/test/Learnmore/fpgaloop_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="fpgaloop" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_textio" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="textio" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="37" />
+   <wvobject fp_name="/fpgaloop/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/reset_h" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset_h</obj_property>
+      <obj_property name="ObjectShortName">reset_h</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/rxf_l" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rxf_l</obj_property>
+      <obj_property name="ObjectShortName">rxf_l</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/oe_l" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">oe_l</obj_property>
+      <obj_property name="ObjectShortName">oe_l</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/rd_l" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rd_l</obj_property>
+      <obj_property name="ObjectShortName">rd_l</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/wr_l" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">wr_l</obj_property>
+      <obj_property name="ObjectShortName">wr_l</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/siwua" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">siwua</obj_property>
+      <obj_property name="ObjectShortName">siwua</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/d" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">d[7:0]</obj_property>
+      <obj_property name="ObjectShortName">d[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/clkb" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clkb</obj_property>
+      <obj_property name="ObjectShortName">clkb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/r" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r[2:0]</obj_property>
+      <obj_property name="ObjectShortName">r[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/g" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">g[2:0]</obj_property>
+      <obj_property name="ObjectShortName">g[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/b" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">b[2:0]</obj_property>
+      <obj_property name="ObjectShortName">b[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/hs" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">hs</obj_property>
+      <obj_property name="ObjectShortName">hs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/vs" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vs</obj_property>
+      <obj_property name="ObjectShortName">vs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/rstb" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rstb</obj_property>
+      <obj_property name="ObjectShortName">rstb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/cnt_rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">cnt_rst</obj_property>
+      <obj_property name="ObjectShortName">cnt_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/chkrst" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">chkrst[15:0]</obj_property>
+      <obj_property name="ObjectShortName">chkrst[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/pair" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pair[1:0]</obj_property>
+      <obj_property name="ObjectShortName">pair[1:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/wea" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">wea[0:0]</obj_property>
+      <obj_property name="ObjectShortName">wea[0:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/hld_l" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">hld_l</obj_property>
+      <obj_property name="ObjectShortName">hld_l</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/byte_h" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">byte_h[7:0]</obj_property>
+      <obj_property name="ObjectShortName">byte_h[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/byte_l" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">byte_l[7:0]</obj_property>
+      <obj_property name="ObjectShortName">byte_l[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/addra" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addra[15:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/addrb" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addrb[15:0]</obj_property>
+      <obj_property name="ObjectShortName">addrb[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/dina" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">dina[8:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/doutb" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">doutb[8:0]</obj_property>
+      <obj_property name="ObjectShortName">doutb[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/nxt_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">nxt_state</obj_property>
+      <obj_property name="ObjectShortName">nxt_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/crash" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">crash</obj_property>
+      <obj_property name="ObjectShortName">crash</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/h_on" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">h_on[2:0]</obj_property>
+      <obj_property name="ObjectShortName">h_on[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/count_h" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">count_h[9:0]</obj_property>
+      <obj_property name="ObjectShortName">count_h[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/count_v" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">count_v[9:0]</obj_property>
+      <obj_property name="ObjectShortName">count_v[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/hs_tmp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">hs_tmp</obj_property>
+      <obj_property name="ObjectShortName">hs_tmp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/vs_tmp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vs_tmp</obj_property>
+      <obj_property name="ObjectShortName">vs_tmp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/r_tmp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_tmp</obj_property>
+      <obj_property name="ObjectShortName">r_tmp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/g_tmp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">g_tmp</obj_property>
+      <obj_property name="ObjectShortName">g_tmp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/fpgaloop/b_tmp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">b_tmp</obj_property>
+      <obj_property name="ObjectShortName">b_tmp</obj_property>
+   </wvobject>
+</wave_config>
